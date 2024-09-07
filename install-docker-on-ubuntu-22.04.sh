@@ -1,9 +1,15 @@
 #!/bin/bash
 
-echo "=== Install Docker Community Edition on Ubuntu 22.04 ==="
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${YELLOW}=== Install Docker Community Edition on Ubuntu 22.04 ===${NC}"
 echo
 
-echo "=== Preparation Before Installation ==="
+echo -e "${YELLOW}=== Preparation Before Installation ===${NC}"
 sudo apt update
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
@@ -18,14 +24,15 @@ sudo apt update
 
 # Verify Docker CE is available in the repository
 sudo apt-cache policy docker-ce
+echo
 
-echo "=== Installing Docker Community Edition ==="
+echo -e "${YELLOW}=== Installing Docker Community Edition ===${NC}"
 sudo apt install -y docker-ce
 
 echo
-echo "=== Docker Installation Completed ==="
+echo -e "${GREEN}=== Docker Installation Completed ===${NC}"
 echo
 
 # Check Docker status
-echo "=== Checking Docker status ==="
+echo -e "${YELLOW}=== Checking Docker status ===${NC}"
 sudo systemctl status docker

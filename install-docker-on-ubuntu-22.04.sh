@@ -13,10 +13,18 @@ echo -e "${YELLOW}=== Preparation Before Installation ===${NC}"
 sudo apt update
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
-# Add Docker’s official GPG key if it doesn't already exist
+# Add Docker’s official GPG key using a temporary file
+TEMP_KEYRING="/usr/share/keyrings/docker-temp-keyring.gpg"
 if [ ! -f /usr/share/keyrings/docker-archive-keyring.gpg ]; then
     echo -e "${YELLOW}=== Adding Docker GPG key ===${NC}"
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o $TEMP_KEYRING
+    if [ $? -eq 0 ]; then
+        sudo mv $TEMP_KEYRING /usr/share/keyrings/docker-archive-keyring.gpg
+        echo -e "${GREEN}GPG key added successfully.${NC}"
+    else
+        echo -e "${RED}Failed to download or dearmor the GPG key.${NC}"
+        exit 1
+    fi
 else
     echo -e "${GREEN}Docker GPG key already exists, skipping download.${NC}"
 fi

@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 echo -e "${YELLOW}=== Install Docker Community Edition on Ubuntu 22.04 ===${NC}"
 echo
 
-echo -e "${YELLOW}=== Preparation Before Installation ===${NC}"
+echo -e "${YELLOW}=========== Preparation Before Installation ============${NC}"
 sudo apt update
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 

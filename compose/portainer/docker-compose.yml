@@ -1,0 +1,16 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9000:9000"  # Port untuk akses UI Portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Akses ke Docker daemon
+      - /server/data/portainer/data/:/data  # Volume untuk data Portainer
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
